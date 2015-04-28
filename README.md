@@ -48,7 +48,10 @@ The project is comprised of the following maven modules:
 * `config` - this module defines API for reading namespace configuration data from / writing to a *backend*. Currently *file system backend* is provided and *Redis backend* (used internally at Glassdoor) is to be provided soon. The module also exposes `Planout4jRepository` interface which acts as a facade to one or more *backends*. It depends on `compiler` for parsing the data.
 * `api` - this is the primary entry point. It provides `NamespaceFactory` interface and several implementations. It depends on `config` for loading up each individual *namespace* and maintains a cache of those keyed by name. This is what majority of developers will likely use.
 
-## Maven - TBD
+## Maven
+Binary artifacts are hosted at Sonatype repository. The current set of snapshot artifacts is available [here](https://oss.sonatype.org/content/groups/staging/com/glassdoor/planout4j/)
+
+The releases will be pushed to maven central.
 
 ## Sample use
 

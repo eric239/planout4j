@@ -12,6 +12,43 @@
 
     <name>planout4j parent</name>
     <description>PlanOut for Java - parent POM</description>
+    <url>https://github.com/eric239/planout4j</url> <!-- TODO: set accordingly -->
+
+
+    <licenses>
+        <license>
+            <name>BSD License</name>
+            <url>http://www.opensource.org/licenses/bsd-license.php</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Glassdoor</name>
+        <url>http://www.glassdoor.com/blog</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>Ernest Mishkin</name>
+            <organization>Glassdoor</organization>
+        </developer>
+        <developer>
+            <name>Phanindra Reva</name>
+            <organization>Glassdoor</organization>
+        </developer>
+        <developer>
+            <name>Gheorghe Muresan</name>
+            <organization>Glassdoor</organization>
+        </developer>
+    </developers>
+
+
+    <scm>
+        <connection>scm:git:git://github.com/eric239/planout4j.git</connection>
+        <developerConnection>scm:git:git@github.com:eric239/planout4j.git</developerConnection>
+        <url>https://github.com/eric239/planout4j</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <modules>
         <module>core</module>
@@ -20,11 +57,15 @@
 		<module>api</module>
     </modules>
 
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
         <maven-compiler.version>3.3</maven-compiler.version>
         <maven-surefire.version>2.18.1</maven-surefire.version>
+        <maven-source.version>2.4</maven-source.version>
+        <maven-javadoc.version>2.10.3</maven-javadoc.version>
+        <sonatype-plugin.version>1.6.5</sonatype-plugin.version>
         <slf4j.version>1.7.12</slf4j.version>
         <log4j12.version>1.2.17</log4j12.version>
         <commons-lang3.version>3.4</commons-lang3.version>
@@ -51,6 +92,46 @@
                     <compilerArgument>-Xlint</compilerArgument>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${sonatype-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>
@@ -222,5 +303,17 @@
         </dependency>
 
     </dependencies>
+
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
 </project>
